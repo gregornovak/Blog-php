@@ -1,5 +1,7 @@
 $(function() {
+    ///////////////////////////////////////////////////////////////////////////
     //box shadow za objave na domači strani
+    ///////////////////////////////////////////////////////////////////////////
     var link = $("a.main-content");
     //ko je uporabnikova miška v div.post dodaj box shadow za ta element
     link.on("mouseenter", function(){
@@ -12,6 +14,7 @@ $(function() {
 
     ///////////////////////////////////////////////////////////////////////////
     //validacija za novega uporabnika
+    ///////////////////////////////////////////////////////////////////////////
     //validiranje username-a
     //pridobim formo, za dodajanje uporabnikov
     var form = document.forms["userInsert"];
@@ -92,7 +95,7 @@ $(function() {
             password1.style.backgroundColor = "rgb(255, 111, 111)";
             password2.style.backgroundColor = "rgb(255, 111, 111)";
             var span = form.querySelector(".add-err3");
-            span.innerHTML = "Vpišite gesli v oba polja!";
+            span.innerHTML = "Vpišite gesli v obe polji!";
             span.style.display = "initial";
         }
 
