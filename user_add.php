@@ -2,7 +2,7 @@
 include_once "./header.php";
 ?>
 <div class="add-post">
-    <form action="user_insert.php" method="POST" name="userInsert" onsubmit="return username()">
+    <form action="user_insert.php" method="POST" name="userInsert">
         <ul>
             <li>
                 <h2>Registracija uporabnika</h2>
