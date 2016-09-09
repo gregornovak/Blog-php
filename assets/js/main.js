@@ -9,19 +9,25 @@ $(function() {
     link.on("mouseleave", function(){
         $(this).parent().css("box-shadow", "0px 2px 2px -2px rgb(181,181,181)");
     });
-
     ///////////////////////////////////////////////////////////////////////////
-    //validacija za novega uporabnika
-    //validiranje username-a
-    //pridobim formo, za dodajanje uporabnikov
-    var form = document.forms["userInsert"];
-    //pridobim prvi element v formi
-    var username = form.elements["username"];
-    //dodam event listener takrat ko uporabnik klikne iz polja naredi validacijo
-    username.addEventListener("blur", isUser);
-    //če ustvariš regex z constructorjem, potem nerabiš /
-    //validacija uporabniškega imena s pomočjo regular expr
-    function isUser(){
+    function username(){
+        var user = document.forms["userInsert"].elements["username"];
+        if (user.length > 0){
+            return true;
+        } else {
+            return false;
+        }
+    };
+    ///////////////////////////////////////////////////////////////////////////
+    function isValid(){
+        //validacija za novega uporabnika
+        //validiranje username-a
+        //pridobim formo, za dodajanje uporabnikov
+        var form = document.forms["userInsert"];
+        //pridobim prvi element v formi
+        var username = form.elements["username"];
+        //če ustvariš regex z constructorjem, potem nerabiš /
+        //validacija uporabniškega imena s pomočjo regular expr
         //ustvarim regex za username
         var reg = new RegExp("^[a-zA-Z0-9]+$");
         //če je polje večje od 4 in manjše od 20 ter je test funkcija vrnila true -> vse je vredu
@@ -29,18 +35,17 @@ $(function() {
             username.style.backgroundColor = "rgb(148, 255, 143)";
             var span = form.querySelector(".add-err1");
             span.style.display = "none";
+            return true;
         } else {
             var span = form.querySelector(".add-err1");
             span.innerHTML = "Dovoljene so samo črke A-Z ter števila!";
             span.style.display = "initial";
             username.style.backgroundColor = "rgb(255, 111, 111)";
+            return false;
         }
-    }
-    //validacija emaila z regexi
-    var email = form.elements["email"];
-    //dodam event listener ko uporabnik klikne iz polja
-    email.addEventListener("blur", isEmail);
-    function isEmail(){
+
+        //validacija emaila z regexi
+        var email = form.elements["email"];
         //dodam regex za validacijo emaila
         var reg = new RegExp("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
         //če email ne vsebuje prepovedanih characterjev je email validen
@@ -48,20 +53,17 @@ $(function() {
             email.style.backgroundColor = "rgb(148, 255, 143)";
             var span = form.querySelector(".add-err2");
             span.style.display = "none";
+            return true;
         } else {
             email.style.backgroundColor = "rgb(255, 111, 111)";
             var span = form.querySelector(".add-err2");
             span.style.display = "initial";
             span.innerHTML = "Neveljaven email";
+            return false;
         }
-    }
-    //validacija gesla
-    var password1 = form.elements["password1"];
-    var password2 = form.elements["password2"];
-    //dodam event listenerja na obe polji ob kliku izven teh polj
-    password1.addEventListener("blur", isPassword);
-    password2.addEventListener("blur", isPassword);
-    function isPassword(){
+        //validacija gesla
+        var password1 = form.elements["password1"];
+        var password2 = form.elements["password2"];
         //če nista obe polji prazni
         if(!(password1.value === "" || password1.value === null) && !(password2.value === "" || password2.value === null)){
             //preveri če sta vrednosti 1. in 2. polja isti
@@ -74,12 +76,14 @@ $(function() {
                     password2.style.backgroundColor = "rgb(148, 255, 143)";
                     var span = form.querySelector(".add-err3");
                     span.style.display = "none";
+                    return true;
                 } else{
                     password1.style.backgroundColor = "rgb(255, 111, 111)";
                     password2.style.backgroundColor = "rgb(255, 111, 111)";
                     var span = form.querySelector(".add-err3");
                     span.innerHTML = "Prekratko geslo/dovoljene so črke A-Z ter števila";
                     span.style.display = "initial";
+                    return false;
                 }
             } else{
                 password1.style.backgroundColor = "rgb(255, 111, 111)";
@@ -87,6 +91,7 @@ $(function() {
                 var span = form.querySelector(".add-err3");
                 span.innerHTML = "Gesli se ne ujemata!";
                 span.style.display = "initial";
+                return false;
             }
         } else{
             password1.style.backgroundColor = "rgb(255, 111, 111)";
@@ -94,8 +99,8 @@ $(function() {
             var span = form.querySelector(".add-err3");
             span.innerHTML = "Vpišite gesli v oba polja!";
             span.style.display = "initial";
+            return false;
         }
-
     }
 ///////////////////////////////////////////////////////////////////////////////
 });
