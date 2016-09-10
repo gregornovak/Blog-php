@@ -1,4 +1,5 @@
 <?php
+include_once "./functions.php";
 //preverim ali je request tipa post
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     //če je bila forma submitana pridobi podatke
