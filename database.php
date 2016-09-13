@@ -12,5 +12,4 @@ if(!$link) {
 }
 //če je bila povezava uspešna nastavim charset na utf8
 mysqli_set_charset($link, "utf8");
-mysqli_close($link);
 ?>

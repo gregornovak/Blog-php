@@ -2,20 +2,20 @@ $(function() {
     ///////////////////////////////////////////////////////////////////////////
     //box shadow za objave na domači strani
     ///////////////////////////////////////////////////////////////////////////
-    var link = $("a.main-content");
+    var $link = $("a.main-content");
     //ko je uporabnikova miška v div.post dodaj box shadow za ta element
-    link.on("mouseenter", function(){
+    $link.on("mouseenter", function(){
         $(this).parent().css("box-shadow", "0px 2px 6px 0px rgb(181,181,181");
     });
     //ko uporabnik zapusti div.post zmanjšaj box shadow za ta element
-    link.on("mouseleave", function(){
+    $link.on("mouseleave", function(){
         $(this).parent().css("box-shadow", "0px 2px 2px -2px rgb(181,181,181)");
     });
 
     ///////////////////////////////////////////////////////////////////////////
     //validacija za novega uporabnika
     ///////////////////////////////////////////////////////////////////////////
-    document.forms["userInsert"].onsubmit = function isInsertValid(){
+    document.forms["userInsert"].onsubmit = function (){
         //validiranje username-a
         //pridobim formo, za dodajanje uporabnikov
         var form = document.forms["userInsert"];
@@ -97,5 +97,56 @@ $(function() {
     return true;
     }
 
-///////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+    //validacija za prijavo uporabnika
+    ///////////////////////////////////////////////////////////////////////////
+    document.forms["userLogin"].onsubmit = function(){
+        //pridobim formo, za dodajanje uporabnikov
+        var form = document.forms["userLogin"];
+        //validacija emaila z regexi
+        var email = form.elements["email"];
+        //dodam regex za validacijo emaila
+        var reg = new RegExp("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
+        //če email ne vsebuje prepovedanih characterjev je email validen
+        if(reg.test(email.value) === true){
+            email.style.backgroundColor = "rgb(148, 255, 143)";
+            var span = form.querySelector(".add-err1");
+            span.style.display = "none";
+        } else {
+            email.style.backgroundColor = "rgb(255, 111, 111)";
+            var span = form.querySelector(".add-err1");
+            span.style.display = "initial";
+            span.innerHTML = "Neveljaven email";
+            return false;
+        }
+
+        //validacija gesla
+        var password = form.elements["password"];
+        //če nista obe polja prazna
+        if(!(password.value === "" || password.value === null)){
+            //dodam regex za gesli
+            var reg = new RegExp("^[a-zA-Z0-9]+$");
+            //če je geslo večje od 6 znakov ter krajše od 60 in test funkcija vrne true za regex -> je vse vredu
+            if(password.value.length >= 6 && password.value.length <= 60 && reg.test(password.value) === true){
+                password.style.backgroundColor = "rgb(148, 255, 143)";
+                var span = form.querySelector(".add-err2");
+                span.style.display = "none";
+            } else{
+                password.style.backgroundColor = "rgb(255, 111, 111)";
+                var span = form.querySelector(".add-err2");
+                span.innerHTML = "Prekratko geslo/dovoljene so črke A-Z ter števila";
+                span.style.display = "initial";
+                return false;
+            }
+        } else{
+            password.style.backgroundColor = "rgb(255, 111, 111)";
+            var span = form.querySelector(".add-err2");
+            span.innerHTML = "Vpišite gesli v obe polji!";
+            span.style.display = "initial";
+            return false;
+        }
+    return true;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
 });
