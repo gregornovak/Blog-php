@@ -1,9 +1,12 @@
+*{
+    box-sizing: border-box;
+    font-family: 'Exo 2', sans-serif;
+}
 html {
     height: 100%;
 }
 body {
     margin: 0;
-    font-family: 'Exo 2', sans-serif;
     box-sizing: border-box;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -14,14 +17,13 @@ body {
             flex-direction: column;
     min-height: 100%;
 }
-/*domača stran - header, blog posti, footer*/
+/*******************************************************************************domača stran - header, blog posti, footer
+*******************************************************************************/
 header {
-    box-sizing: border-box;
     border-bottom: 1px solid rgb(214, 214, 214);
     height: 65px;
 }
 header .nav-inner{
-    box-sizing: border-box;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -62,14 +64,14 @@ header .nav-inner .logo .title {
     transition: 300ms color ease-in-out;
     font-size: 24px;
 }
-header .nav-inner .auth .login, .register {
+header .nav-inner .auth .login, .register, .profile {
     -webkit-transition: 300ms color ease-in-out;
     transition: 300ms color ease-in-out;
 }
 header .nav-inner .logo .title:hover, .title:active{
     color: rgb(98, 98, 98);
 }
-header .nav-inner .auth .login:hover, .login:active, .register:hover, .register:active {
+header .nav-inner .auth .login:hover, .login:active, .register:hover, .register:active, .profile:hover, .profile:active {
     color: rgb(98, 98, 98);
 }
 .q-container {
@@ -182,9 +184,13 @@ footer .f-info p{
 footer .f-info p span{
     color: rgb(67, 155, 227);
 }
-/*konec domače strani - header, blog posti, footer*/
+/*******************************************************************************
+konec domače strani - header, blog posti, footer
+*******************************************************************************/
 
-/*posamezen blog post ter komentarji*/
+/*******************************************************************************
+posamezen blog post ter komentarji
+*******************************************************************************/
 .comments{
     margin-top: 30px;
     border: 1px solid rgb(214, 214, 214);
@@ -265,9 +271,16 @@ footer .f-info p span{
     text-align: justify;
     margin: 10px 0 0 0;
 }
-/*konec cssja za posamezen blog post ter komentarje*/
+.comments .comment .comment-error{
+    color: rgb(250, 84, 84);
+}
+/*******************************************************************************
+konec cssja za posamezen blog post ter komentarje
+*******************************************************************************/
 
-/*css za dodajanje objave/uporabnika*/
+/*******************************************************************************
+css za dodajanje objave/uporabnika
+*******************************************************************************/
 .add-post{
     max-width: 600px;
     margin: 30px auto 0 auto;
@@ -277,6 +290,9 @@ footer .f-info p span{
     padding: 15px 20px;
     box-sizing: border-box;
     box-shadow: 0 2px 2px -1px rgb(181, 181, 181);
+}
+.add-post p{
+    text-align: center;
 }
 .add-post form ul{
     margin: 0;
@@ -293,6 +309,7 @@ footer .f-info p span{
     right: 0;
     color: rgb(255, 111, 111);
 }
+
 .add-post form ul li:nth-child(1) h2{
     text-align: center;
     margin: 0 0 15px 0;
@@ -366,4 +383,47 @@ footer .f-info p span{
     border-color: rgb(142, 142, 142);
     box-shadow: 0 1px 2px 0 rgb(181, 181, 181);
 }
-/*konec cssja za dodajanje objave/uporabnika*/
+.add-post form ul li.error-text{
+    color: rgb(232, 78, 78);
+}
+/*******************************************************************************
+konec cssja za dodajanje objave/uporabnika
+*******************************************************************************/
+
+/*******************************************************************************
+Uporabniški profil
+*******************************************************************************/
+.user-profile {
+    background: white;
+    border: 1px solid rgb(214, 214, 214);
+    border-radius: 3px;
+    max-width: 500px;
+    margin: 30px auto 0 auto;
+}
+.user-profile ul{
+    margin: 0;
+    padding: 0 0 5px 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+}
+.user-profile ul h2{
+    text-align: center;
+    border-bottom: 1px solid rgb(214, 214, 214);
+    margin: 0;
+    padding: 5px 0;
+}
+.user-profile ul li{
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    padding: 5px 10px;
+    color:  rgb(139, 139, 139);
+}
+.user-profile ul li span{
+    width: 140px;
+    color: rgb(67, 155, 227);
+}
+/*******************************************************************************
+Konec uporabniškega profila
+*******************************************************************************/
