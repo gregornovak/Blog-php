@@ -1,6 +1,5 @@
 <?php
-session_start();
-
+include_once "./session.php";
 include_once "./functions.php";
 include_once "./database.php";
 if (isset($_SESSION["id_user"])){
@@ -21,9 +20,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $result = mysqli_query($link, $query);
         if (mysqli_num_rows($result) !== 0){
             $_SESSION["errors"] = "Uporabnik s tem uporabniškim imenom ali emailom že obstaja!";
-            echo "Uporabnik s tem uporabniškim imenom ali emailom že obstaja!";
-            //header("Location: user_add.php");
-            //die();
+            header("Location: user_add.php");
+            die();
         } else {
             //preverim ali je uporabnik vpisal ustrezno uporabniško ime
             if (strlen($username) >= 4 && strlen($username) <= 20 && preg_match("/^[a-zA-Z0-9]+$/", $username) === 1) {
@@ -33,17 +31,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         $password = password_hash($pass1, PASSWORD_DEFAULT);
                         $query = "INSERT INTO users(username, email, pass) VALUES('$username', '$email', '$password')";
                         mysqli_query($link, $query);
+                        header("Location: user_login.php");
+                        die();
                     } else {
                         //gesli se ne ujemata, prekratko/predolgo geslo, uporablja neustrezne znake
                         $_SESSION["errors"] = "Geslo mora biti dolgo od 6 do 60 znakov / lahko vsebuje števila, ter velike in male črke";
+                        header("Location: user_add.php");
+                        die();
                     }
                 } else {
                     //email ni pravilen
                     $_SESSION["errors"] = "Email lahko vsebuje števila, črke od a do z ter (-, _, .) znake!";
+                    header("Location: user_add.php");
+                    die();
                 }
             } else {
                 //uporabniško ime mora biti dolgo od 4 do 20 znakov ter lahko vsebuje števila, ter male in velike črke a-z
                 $_SESSION["errors"] = "Uporabniško ime lahko vsebuje velike in male črke ter števila, nesme biti krajše od 4ih znakov ter daljše od 20ih znakov!";
+                header("Location: user_add.php");
+                die();
             }
         }
     }

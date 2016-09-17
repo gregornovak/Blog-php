@@ -1,4 +1,7 @@
 <?php
+if (!isset($_SESSION)) {
+    session_start();
+}
 include_once "./database.php";
 ?>
 <!DOCTYPE html>
@@ -18,11 +21,26 @@ include_once "./database.php";
             <div class="contribute">
                 <a href="post_add.php">Dodaj objavo</a>
             </div>
-            <div class="auth">
-                <a href="user_login.php" class="login">Prijava</a>
-                <span class="slash"> / </span>
-                <a href="user_add.php" class="register">Registracija</a>
-            </div>
+            <?php
+            if (!isset($_SESSION["id_user"])) {
+            ?>
+                <div class="auth">
+                    <a href="user_login.php" class="login">Prijava</a>
+                    <span class="slash"> / </span>
+                    <a href="user_add.php" class="register">Registracija</a>
+                </div>
+            <?php
+            } else {
+            ?>
+                <div class="auth">
+                    <a href="user_profile.php?id=<?php echo $_SESSION["id_user"];?>" class="profile">Moj profil</a>
+                    <span class="slash"> / </span>
+                    <a href="user_logout.php" class="profile">Odjava</a>
+                </div>
+            <?php
+            }
+            ?>
+
         </div>
     </header>
     <div class="q-container">
